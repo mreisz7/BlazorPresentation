@@ -1,0 +1,11 @@
+﻿<section class="slide-frame">
+    @ChildContent
+</section>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public int SlideNumber { get; set; }
+}
