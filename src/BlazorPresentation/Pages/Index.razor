@@ -1,14 +1,71 @@
 ﻿@page "/"
 
-<Slide1 />
-<Slide2 />
-<Slide3 />
+<div @ref=@SlideContainerRef tabindex="0" @onkeydown=@HandleKeyDown>
+    @for (int i = 0; i < Slides.Count; i++)
+    {
+        Type? slideType = Type.GetType($"BlazorPresentation.Slides.{Slides[i]}");
+        if (slideType is not null)
+        {
+            <SlideFrame SlideIndex=@i CurrentSlideIndex=@CurrentSlide>
+                <DynamicComponent Type=@slideType />
+            </SlideFrame>
+        }
+    }
+</div>
+
+<footer>
+    <span>@($"{CurrentSlide + 1} / {Slides.Count}")</span>
+</footer>
 
 @code {
-    //public List<RenderFragment> Slides { get; set; } = new()
-    //{
-    //    <Slide1 />,
-    //    <Slide2 />,
-    //    <Slide3 />,
-    //};
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await SlideContainerRef.FocusAsync();
+        }
+    }
+
+    public List<string> Slides { get; set; } = new()
+    {
+        "Slide3",
+        "Slide1",
+        "Slide2",
+        "Slide3",
+        "Slide1",
+        "Slide2",
+        "Slide3",
+        "Slide1",
+        "Slide2",
+        "Slide3",
+        "Slide1",
+        "Slide2",
+        "Slide3",
+    };
+
+    public int CurrentSlide = 0;
+
+    private ElementReference SlideContainerRef;
+
+    private void HandleKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Code == "KeyH")
+        {
+            CurrentSlide = 0;
+        }
+        if (e.Code == "ArrowRight" || e.Code == "ArrowDown" || e.Code == "Space" || e.Code == "Enter")
+        {
+            if (CurrentSlide + 1 < Slides.Count)
+            {
+                CurrentSlide++;
+            }
+        }
+        if (e.Code == "ArrowLeft" || e.Code == "ArrowUp")
+        {
+            if (CurrentSlide > 0)
+            {
+                CurrentSlide--;
+            }
+        }
+    }
 }

@@ -1,4 +1,8 @@
-﻿html, body {
+﻿* {
+    box-sizing: border-box;
+}
+
+html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #fff;
     background-color: #222;
@@ -13,23 +17,70 @@
 main {
     height: 100%;
     width: 100%;
-    display: flex;
-    scroll-snap-type: x mandatory;
-    overflow-x: scroll;
+    overflow: hidden;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 35px;
+    padding: 0 20px 15px;
+    text-align: right;
 }
 
 section.slide-frame {
+    position: fixed;
+    top: 0;
     flex: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    scroll-snap-align: start;
     height: 100vh;
     width: 100vw;
+    transition: .25s all linear;
+    border: 5px solid #eee;
 }
+
+section.slide-frame.current {
+    left: 0;
+}
+
+section.slide-frame.previous {
+    left: -100vw;
+}
+
+section.slide-frame.next {
+    left: 100vw;
+}
+
+
 
 h3 {
     font-size: 72px;
+}
+
+.loader {
+    position: fixed;
+    top: calc(50% - 50px);
+    left: calc(50% - 50px);
+    border: 10px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 10px solid #3498db;
+    width: 100px;
+    height: 100px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 #blazor-error-ui {
