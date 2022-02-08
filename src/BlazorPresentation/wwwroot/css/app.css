@@ -35,6 +35,7 @@ section.slide-frame {
     top: 0;
     flex: none;
     display: flex;
+    flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -55,9 +56,7 @@ section.slide-frame.next {
     left: 100vw;
 }
 
-
-
-h3 {
+h1 {
     font-size: 72px;
 }
 
