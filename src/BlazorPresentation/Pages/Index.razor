@@ -47,6 +47,22 @@
 
     private ElementReference SlideContainerRef;
 
+    private void IncrementSlides()
+    {
+        if (CurrentSlide + 1 < Slides.Count)
+        {
+            CurrentSlide++;
+        }
+    }
+
+    private void DecrementSlides()
+    {
+        if (CurrentSlide > 0)
+        {
+            CurrentSlide--;
+        }
+    }
+
     private void HandleKeyDown(KeyboardEventArgs e)
     {
         if (e.Code == "KeyH")
@@ -55,14 +71,14 @@
         }
         if (e.Code == "ArrowRight" || e.Code == "ArrowDown" || e.Code == "Space" || e.Code == "Enter")
         {
-            if (CurrentSlide + 1 < Slides.Count)
-            {
-                CurrentSlide++;
-            }
+            IncrementSlides();
         }
         if (e.Code == "ArrowLeft" || e.Code == "ArrowUp")
         {
-            if (CurrentSlide > 0)
+            DecrementSlides();
+        }
+    }
+
             {
                 CurrentSlide--;
             }
