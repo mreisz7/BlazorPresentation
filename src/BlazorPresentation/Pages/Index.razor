@@ -1,6 +1,6 @@
 ﻿@page "/"
 
-<div @ref=@SlideContainerRef tabindex="0" @onkeydown=@HandleKeyDown>
+<div @ref=@SlideContainerRef tabindex="0" @onkeydown=@HandleKeyDown @ontouchstart=@HandleTouchStart @ontouchmove=@HandleTouchMove>
     @for (int i = 0; i < Slides.Count; i++)
     {
         Type? slideType = Type.GetType($"BlazorPresentation.Slides.{Slides[i]}");
@@ -47,6 +47,9 @@
 
     private ElementReference SlideContainerRef;
 
+    private double? xTouchStart = null;
+    private double? yTouchStart = null;
+
     private void IncrementSlides()
     {
         if (CurrentSlide + 1 < Slides.Count)
@@ -79,9 +82,47 @@
         }
     }
 
+    private void HandleTouchStart(TouchEventArgs e)
+    {
+        xTouchStart = e.Touches[0].ClientX;
+        yTouchStart = e.Touches[0].ClientY;
+    }
+
+    private void HandleTouchMove(TouchEventArgs e)
+    {
+        if (xTouchStart is not null && yTouchStart is not null)
+        {
+            double xTouchMove = e.Touches[0].ClientX;
+            double yTouchMove = e.Touches[0].ClientY;
+
+            double xTouchDiff = (double)xTouchStart - xTouchMove;
+            double yTouchDiff = (double)yTouchStart - yTouchMove;
+
+            if (Math.Abs(xTouchDiff) > Math.Abs(yTouchDiff))
             {
-                CurrentSlide--;
+                if (xTouchDiff > 0)
+                {
+                    // Right Swipe triggered
+                    IncrementSlides();
+                } else
+                {
+                    // Left Swipe triggered
+                    DecrementSlides();
+                }
+            } else
+            {
+                if (yTouchDiff > 0)
+                {
+                    // Down Swipe triggered
+                    Console.WriteLine("Down Swipe");
+                } else
+                {
+                    // Up Swipe triggered
+                    Console.WriteLine("Up Swipe");
+                }
             }
         }
+        xTouchStart = null;
+        yTouchStart = null;
     }
 }
