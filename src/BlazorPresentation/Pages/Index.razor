@@ -1,6 +1,12 @@
 ﻿@page "/"
 
-<div @ref=@SlideContainerRef tabindex="0" @onkeydown=@HandleKeyDown @ontouchstart=@HandleTouchStart @ontouchmove=@HandleTouchMove>
+<div @ref=@SlideContainerRef 
+     tabindex="0" 
+     @onkeydown=@HandleKeyDown 
+     @ontouchstart=@HandleTouchStart 
+     @ontouchmove=@HandleTouchMove 
+     @onmousewheel=@HandleMouseWheel
+>
     @for (int i = 0; i < Slides.Count; i++)
     {
         Type? slideType = Type.GetType($"BlazorPresentation.Slides.{Slides[i]}");
@@ -29,6 +35,14 @@
     public List<string> Slides { get; set; } = new()
     {
         "TitlePage",
+        "Slide3",
+        "Slide1",
+        "Slide2",
+        "Slide3",
+        "Slide1",
+        "Slide2",
+        "Slide3",
+        "Slide1",
         "Slide3",
         "Slide1",
         "Slide2",
@@ -125,5 +139,17 @@
         }
         xTouchStart = null;
         yTouchStart = null;
+    }
+
+    private void HandleMouseWheel(WheelEventArgs e)
+    {
+        if (e.DeltaY > 0)
+        {
+            IncrementSlides();
+        }
+        if (e.DeltaY < 0)
+        {
+            DecrementSlides();
+        }
     }
 }
