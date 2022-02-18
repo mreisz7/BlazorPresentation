@@ -14,6 +14,10 @@ html, body {
     overflow: hidden;
 }
 
+a {
+    color: #3498db;
+}
+
 main {
     height: 100%;
     width: 100%;
@@ -40,8 +44,8 @@ section.slide-frame {
     align-items: center;
     height: 100vh;
     width: 100vw;
-    transition: .25s all linear;
-    border: 5px solid #eee;
+    transition: .5s all linear;
+    border: 10px solid #eee;
 }
 
 section.slide-frame.current {
@@ -81,6 +85,48 @@ h1 {
         transform: rotate(360deg);
     }
 }
+
+/**********************/
+/***   Title Page   ***/
+/**********************/
+.page-title {
+    font-size: 4.5em;
+    margin-bottom: 0;
+}
+
+.title-secondary {
+    font-size: 3.1em;
+    margin-top: .2em;
+    padding-bottom: 1em;
+    margin-bottom: 1.5em;
+    border-bottom: 3px solid #fff;
+}
+
+.contact-card-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    row-gap: 5em;
+    column-gap: 10em;
+}
+
+.contact-card {
+    display: flex;
+    flex-flow: column nowrap;
+    line-height: 1.5em;
+}
+
+.contact-card .contact-name {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.contact-card .contact-title,
+.contact-card .contact-email {
+    font-size: .9em;
+    font-style: italic;
+}
+
 
 #blazor-error-ui {
     background: lightyellow;
