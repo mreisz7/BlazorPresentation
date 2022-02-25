@@ -86,18 +86,24 @@ h1 {
     }
 }
 
+.splash-image {
+    width: 100%;
+    height: auto;
+    margin: 0;
+}
+
 /**********************/
 /***   Title Page   ***/
 /**********************/
 .page-title {
-    font-size: 4.5em;
+    font-size: clamp(4.4vw, 8.8vw, 4.4rem);
     margin-bottom: 0;
 }
 
 .title-secondary {
-    font-size: 3.1em;
+    font-size: clamp(3vw, 6vw, 3rem);
     margin-top: .2em;
-    padding-bottom: 1em;
+    padding: 0 .5em 1em;
     margin-bottom: 1.5em;
     border-bottom: 3px solid #fff;
 }
@@ -106,8 +112,16 @@ h1 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    row-gap: 5em;
-    column-gap: 10em;
+    row-gap: 4rem;
+    column-gap: 10rem;
+}
+
+@media only screen and (max-width : 667px) {
+    .contact-card-container {
+        grid-template-columns: 1fr;
+        margin-top: 2rem;
+        row-gap: 2.5rem;
+    }
 }
 
 .contact-card {
