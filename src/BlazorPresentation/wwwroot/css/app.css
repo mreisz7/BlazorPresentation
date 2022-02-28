@@ -61,7 +61,7 @@ section.slide-frame.next {
 }
 
 h1 {
-    font-size: 72px;
+    font-size: 64px;
 }
 
 .loader {
@@ -105,16 +105,30 @@ h1 {
 /***   Title Page   ***/
 /**********************/
 .page-title {
-    font-size: clamp(4.4vw, 8.8vw, 4.4rem);
     margin-bottom: 0;
 }
 
+.slide-header {
+    position: absolute;
+    margin: 0;
+    top: 0;
+    width: 100%;
+    font-size: clamp(1rem, 1.5rem, 2rem);
+    text-align: left;
+    padding: 1rem 2rem;
+}
+
+/* typical phone screen resolution */
+@media only screen and (max-width : 667px) {
+    .slide-header {
+        text-align: center;
+    }
+}
+
 .title-secondary {
-    font-size: clamp(3vw, 6vw, 3rem);
-    margin-top: .2em;
-    padding: 0 .5em 1em;
-    margin-bottom: 1.5em;
-    border-bottom: 3px solid #fff;
+    margin-top: .5rem;
+    padding: 0 .5rem 1rem;
+    margin-bottom: 0;
 }
 
 .contact-card-container {
@@ -123,6 +137,7 @@ h1 {
     grid-template-rows: repeat(2, 1fr);
     row-gap: 4rem;
     column-gap: 10rem;
+    margin-top: 2.5rem;
 }
 
 @media only screen and (max-width : 667px) {
