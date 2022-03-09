@@ -194,3 +194,47 @@ h1 {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+/* JavaScript-section specific */
+.code {
+    font-family: Consolas;
+    color: darkred;
+}
+
+.code-block {
+    font-size: 32px;
+}
+
+.code-comment {
+    font-family: Consolas;
+    color: gray;
+}
+
+.code-blue {
+    font-family: Consolas;
+    color: cornflowerblue;
+}
+
+.code-yellow {
+    font-family: Consolas;
+    color: darkgoldenrod;
+}
+
+.terminal-arrow {
+    font-family: Consolas;
+    color: gray;
+}
+
+.code-result {
+    font-family; Consolas;
+    color: #fff;
+}
+
+.quote {
+    width: 75%;
+    text-align: center;
+}
+
+.special {
+    color: gold;
+}
