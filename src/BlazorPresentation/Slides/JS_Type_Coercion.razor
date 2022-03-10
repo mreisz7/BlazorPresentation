@@ -1,0 +1,12 @@
+﻿<h1>Aggressive Type Coercion</h1>
+
+<h1 class="code">
+  <span class="terminal-arrow">></span> 10 == '10' <span class="code-comment">// === provided later.</span><br />
+  <span class="terminal-arrow">&lt;</span> <span class="code-result">true</span><br />
+  <span class="terminal-arrow">></span> 'hello' + 1<br />
+  <span class="terminal-arrow">&lt;</span> <span class="code-result">'hello1'</span><br />
+  <span class="terminal-arrow">></span> [] + {}<br />
+  <span class="terminal-arrow">&lt;</span> <span class="code-result">'[object Object]'</span><br />
+  <span class="terminal-arrow">></span> {} + []<br />
+  <span class="terminal-arrow">&lt;</span> <span class="code-result">0</span> <span class="code-comment">// ???</span>
+</h1>
