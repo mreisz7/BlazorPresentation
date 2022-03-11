@@ -13,7 +13,7 @@
         Dictionary<string, object> parameters = new()
         {
             { "IsCurrent", i == CurrentSlide },
-            { "SlideIndex", CurrentSlideIndex },
+            { "SlideStopIndex", CurrentSlideStopIndex },
             { "OnIncrementSlide", EventCallback.Factory.Create(this, IncrementSlides) },
             { "OnDecrementSlide", EventCallback.Factory.Create(this, DecrementSlides) },
         };
@@ -93,7 +93,7 @@
     };
 
     public int CurrentSlide = 0;
-    public int CurrentSlideIndex = 0;
+    public int CurrentSlideStopIndex = 0;
 
     private ElementReference SlideContainerRef;
 
@@ -102,12 +102,12 @@
 
     private void Increment()
     {
-        CurrentSlideIndex++;   
+        CurrentSlideStopIndex++;   
     }
 
     private void Decrement()
     {
-        CurrentSlideIndex--;   
+        CurrentSlideStopIndex--;   
     }
 
     private void IncrementSlides()
@@ -115,7 +115,7 @@
         if (CurrentSlide + 1 < Slides.Count)
         {
             CurrentSlide++;
-            CurrentSlideIndex = 0;
+            CurrentSlideStopIndex = 0;
         }
     }
 
@@ -124,7 +124,7 @@
         if (CurrentSlide > 0)
         {
             CurrentSlide--;
-            CurrentSlideIndex = 0;
+            CurrentSlideStopIndex = 0;
         }
     }
 

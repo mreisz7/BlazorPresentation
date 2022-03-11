@@ -6,7 +6,7 @@ public class SlideBase : ComponentBase
 {
     public override Task SetParametersAsync(ParameterView parameters)
     {
-        if (parameters.TryGetValue(nameof(SlideIndex), out int? value))
+        if (parameters.TryGetValue(nameof(SlideStopIndex), out int? value))
         {
             if (IsCurrent && value is not null)
             {
@@ -14,7 +14,7 @@ public class SlideBase : ComponentBase
                 {
                     OnDecrementSlide.InvokeAsync();
                 }
-                else if (value > SlideIndexMax)
+                else if (value > SlideStopMax)
                 {
                     OnIncrementSlide.InvokeAsync();
                 }
@@ -24,13 +24,13 @@ public class SlideBase : ComponentBase
         return base.SetParametersAsync(parameters);
     }
 
-    public virtual int SlideIndexMax { get; set; } = 0;
+    public virtual int SlideStopMax { get; set; } = 0;
 
     [Parameter]
     public bool IsCurrent { get; set; } = false;
 
     [Parameter]
-    public int SlideIndex { get; set; } = 0;
+    public int SlideStopIndex { get; set; } = 0;
 
     [Parameter]
     [EditorRequired]
@@ -40,9 +40,9 @@ public class SlideBase : ComponentBase
     [EditorRequired]
     public EventCallback OnDecrementSlide { get; set; }
 
-    protected string ShowSlide(int index)
+    protected string ShowSlideStopElement(int index)
     {
-        if (index <= SlideIndex)
+        if (index <= SlideStopIndex)
         {
             return "stop-element show";
         }
