@@ -1,14 +1,12 @@
-﻿<div @onmousedown=@OnMouseClick style="text-align: center">
+﻿@inherits SlideBase
+
+<div style="text-align: center">
   <h1><span class="code">Mocha/Livescript</span> becomes <span class="code">JavaScript</span></h1>
-  <h1 style="visibility: @(_count > 0 ? "visible" : "hidden")">Microsoft develops competitor language <span class="code-blue">JScript</span></h1>
-  <h1 style="visibility: @(_count > 1 ? "visible" : "hidden")">European Computer Manufacturers Association develops standard ECMA-262, better known as <span class="code-yellow">ECMAScript</span></h1>
+  <h1 class=@ShowSlide(1)>Microsoft develops competitor language <span class="code-blue">JScript</span></h1>
+  <h1 class=@ShowSlide(2)>European Computer Manufacturers Association develops standard ECMA-262, better known as <span class="code-yellow">ECMAScript</span></h1>
 </div>
 
 
 @code {
-    private int _count = 0;
-    private void OnMouseClick()
-    {
-        _count++;
-    }
+    public override int SlideIndexMax { get; set; } = 2;
 }

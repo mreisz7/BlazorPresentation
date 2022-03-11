@@ -1,12 +1,18 @@
-﻿<h1>Aggressive Type Coercion</h1>
+﻿@inherits SlideBase
+
+<h1>Aggressive Type Coercion</h1>
 
 <h1 class="code">
   <span class="terminal-arrow">></span> 10 == '10' <span class="code-comment">// === provided later.</span><br />
-  <span class="terminal-arrow">&lt;</span> <span class="code-result">true</span><br />
-  <span class="terminal-arrow">></span> 'hello' + 1<br />
-  <span class="terminal-arrow">&lt;</span> <span class="code-result">'hello1'</span><br />
-  <span class="terminal-arrow">></span> [] + {}<br />
-  <span class="terminal-arrow">&lt;</span> <span class="code-result">'[object Object]'</span><br />
-  <span class="terminal-arrow">></span> {} + []<br />
-  <span class="terminal-arrow">&lt;</span> <span class="code-result">0</span> <span class="code-comment">// ???</span>
+  <span class=@($"{ShowSlide(1)}")><span class="terminal-arrow">&lt;</span> <span class="code-result">true</span><br /></span>
+  <span class=@($"{ShowSlide(2)}")><span class="terminal-arrow">></span> 'hello' + 1<br /></span>
+  <span class=@($"{ShowSlide(3)}")><span class="terminal-arrow">&lt;</span> <span class="code-result">'hello1'</span><br /></span>
+  <span class=@($"{ShowSlide(4)}")><span class="terminal-arrow">></span> [] + {}<br /></span>
+  <span class=@($"{ShowSlide(5)}")><span class="terminal-arrow">&lt;</span> <span class="code-result">'[object Object]'</span><br /></span>
+  <span class=@($"{ShowSlide(6)}")><span class="terminal-arrow">></span> {} + []<br /></span>
+  <span class=@($"{ShowSlide(7)}")><span class="terminal-arrow">&lt;</span> <span class="code-result">0</span> <span class="code-comment">// ???</span></span>
 </h1>
+
+@code {
+    public override int SlideIndexMax { get; set; } = 7;
+}

@@ -1,14 +1,11 @@
-﻿<div @onmousedown=@OnMouseClick style="text-align: center">
+﻿@inherits SlideBase
+
+<div style="text-align: center">
   <h1>Are you capable of writing this code yourself?</h1>
-  <h1 style="visibility: @(_count > 0 ? "visible" : "hidden")"><i style="color: darkred">Should you have to </i> write this code yourself?</h1>
+  <h1 class=@ShowSlide(1)><i class="code">Should you have to </i> write this code yourself?</h1>
 </div>
 
 
 @code {
-    private int _count = 0;
-    private void OnMouseClick(MouseEventArgs mouseEventArgs)
-    {
-        if (mouseEventArgs.Button == 0) _count = Math.Max(0, --_count);
-        else if (mouseEventArgs.Button == 1) _count = Math.Min(1, ++_count);
-    }
+    public override int SlideIndexMax { get; set; } = 1;
 }

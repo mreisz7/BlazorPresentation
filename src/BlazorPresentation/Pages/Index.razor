@@ -10,10 +10,17 @@
     @for (int i = 0; i < Slides.Count; i++)
     {
         Type? slideType = Type.GetType($"BlazorPresentation.Slides.{Slides[i]}");
+        Dictionary<string, object> parameters = new()
+        {
+            { "IsCurrent", i == CurrentSlide },
+            { "SlideIndex", CurrentSlideIndex },
+            { "OnIncrementSlide", EventCallback.Factory.Create(this, IncrementSlides) },
+            { "OnDecrementSlide", EventCallback.Factory.Create(this, DecrementSlides) },
+        };
         if (slideType is not null)
         {
             <SlideFrame SlideIndex=@i CurrentSlideIndex=@CurrentSlide>
-                <DynamicComponent Type=@slideType />
+                <DynamicComponent Type=@slideType Parameters=@parameters />
             </SlideFrame>
         }
     }
@@ -36,6 +43,7 @@
     {
         // Title
         "TitlePage",
+
         // What's Wrong With JavaScript
         "SectionTitleJavascript",
         "JS_Thesis",
@@ -66,11 +74,14 @@
 
         // Blazor
         "SectionTitleBlazor",
+
         // Live Coding
         "SectionTitleLiveCoding",
+
         // Milliman Design System
         "SectionTitleMDS",
         "MDS_WhatIsMDS",
+        "MDS_CarbonDesignSystem",
         "MDS_BCL",
         "MDS_DesignGoals",
         "MDS_WhoCanUseIt",
@@ -82,17 +93,29 @@
     };
 
     public int CurrentSlide = 0;
+    public int CurrentSlideIndex = 0;
 
     private ElementReference SlideContainerRef;
 
     private double? xTouchStart = null;
     private double? yTouchStart = null;
 
+    private void Increment()
+    {
+        CurrentSlideIndex++;   
+    }
+
+    private void Decrement()
+    {
+        CurrentSlideIndex--;   
+    }
+
     private void IncrementSlides()
     {
         if (CurrentSlide + 1 < Slides.Count)
         {
             CurrentSlide++;
+            CurrentSlideIndex = 0;
         }
     }
 
@@ -101,6 +124,7 @@
         if (CurrentSlide > 0)
         {
             CurrentSlide--;
+            CurrentSlideIndex = 0;
         }
     }
 
@@ -110,13 +134,13 @@
         {
             CurrentSlide = 0;
         }
-        if (e.Code == "ArrowRight" || e.Code == "ArrowDown" || e.Code == "Space" || e.Code == "Enter")
+        if (e.Code == "ArrowRight" || e.Code == "ArrowDown" || e.Code == "Space" || e.Code == "Enter" || e.Code == "PageDown")
         {
-            IncrementSlides();
+            Increment();
         }
-        if (e.Code == "ArrowLeft" || e.Code == "ArrowUp")
+        if (e.Code == "ArrowLeft" || e.Code == "ArrowUp" || e.Code == "PageUp")
         {
-            DecrementSlides();
+            Decrement();
         }
     }
 
@@ -141,11 +165,11 @@
                 if (xTouchDiff > 0)
                 {
                     // Right Swipe triggered
-                    IncrementSlides();
+                    Increment();
                 } else
                 {
                     // Left Swipe triggered
-                    DecrementSlides();
+                    Decrement();
                 }
             } else
             {
@@ -168,11 +192,11 @@
     {
         if (e.DeltaY > 0)
         {
-            IncrementSlides();
+            Increment();
         }
         if (e.DeltaY < 0)
         {
-            DecrementSlides();
+            Decrement();
         }
     }
 }
